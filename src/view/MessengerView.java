@@ -65,8 +65,8 @@ public class MessengerView extends JFrame{
         exitBtn.addActionListener(messageListener);
 
         JPanel mainPanel = new JPanel();
-        int rows = 12;
-        int columns = 12;
+        int rows = 10;
+        int columns = 10;
         mainPanel.setLayout(new GridLayout(rows,columns));
         mainPanel.add(myTokenLabel);
         mainPanel.add(myTokenfField);

@@ -3,6 +3,12 @@ package core.verification;
 import javax.swing.*;
 
 public class VerificationFields {
+    public boolean isEmptyField(JTextField nameField){
+        String valueField = nameField.getText();
+        int valueFieldLength = valueField.trim().length();
+        return  valueFieldLength == 0;
+    }
+
     public boolean isEmptyTokenField(JTextField myTokenfField){
         return  isEmptyField(myTokenfField);
     }
@@ -19,12 +25,6 @@ public class VerificationFields {
         return  isEmptyField(groupNameField);
     }
 
-    public boolean isEmptyField(JTextField nameField){
-        String valueField = nameField.getText();
-        int valueFieldLength = valueField.trim().length();
-        return  valueFieldLength == 0;
-    }
-
     public String getValueFieldAfterVerification(String message, String windowTitle){
         return JOptionPane.showInputDialog( null, message,
                             windowTitle, JOptionPane.INFORMATION_MESSAGE );
@@ -32,5 +32,9 @@ public class VerificationFields {
 
     public int getLineLengthWithoutSpaces(String line){
         return line.trim().length();
+    }
+
+    public boolean isEmptyValue(String value){
+        return getLineLengthWithoutSpaces(value) == 0;
     }
 }

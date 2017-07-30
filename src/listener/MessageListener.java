@@ -115,11 +115,6 @@ public class MessageListener implements ActionListener {
                                                                    "Сообщение не запаолнено!");
             setValueInField(message, messageField);
         }
-
-        if(!verification.isEmptyIdGroup(idGroupField) && !verification.isEmptyGroupName(groupNameField) ){
-            JOptionPane.showMessageDialog(null,"Нельзя одноременно указывать два поля" +
-                                        ":id группы и имя групы.\nТолько одно из них должно быть заполнено");
-        }
     }
 
     public void setValueInField(String fieldValue, JTextField fieldName){

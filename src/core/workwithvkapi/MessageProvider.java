@@ -32,7 +32,7 @@ public class MessageProvider {
     }
 
     public void sendMessage(String message){
-       if(verification.getLineLengthWithoutSpaces(groupName) == 0) {
+       if( isGivenGroupId() ) {
            queryToVkontakteWithId = "https://api.vk.com/method/messages.send?" +
                    "user_ids=-" + idGroup +
                    "&message=" + message +
@@ -41,7 +41,7 @@ public class MessageProvider {
            executeQueryOnVkotakte(queryToVkontakteWithId);
        }
 
-       if(verification.getLineLengthWithoutSpaces(idGroup) == 0) {
+       if( isGivenGroupName()) {
            queryToVkontakteWithGroupName = "https://api.vk.com/method/messages.send?" +
                    "domain=" + groupName +
                    "&message=" + message +
@@ -49,6 +49,14 @@ public class MessageProvider {
 
            executeQueryOnVkotakte(queryToVkontakteWithGroupName);
        }
+    }
+
+    public boolean isGivenGroupName(){
+        return !verification.isEmptyValue(groupName);
+    }
+
+    public boolean isGivenGroupId(){
+        return !verification.isEmptyValue(idGroup);
     }
 
     private void executeQueryOnVkotakte(String query){
