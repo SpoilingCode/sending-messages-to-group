@@ -1,5 +1,7 @@
 package core.workwithvkapi;
 
+import core.verification.VerificationFields;
+
 import javax.swing.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -11,6 +13,11 @@ public class MessageProvider {
     private String myToken;
     private String idGroup;
     private String groupName;
+    private VerificationFields verification;
+
+    public MessageProvider() {
+        this.verification = new VerificationFields();
+    }
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
@@ -25,7 +32,7 @@ public class MessageProvider {
     }
 
     public void sendMessage(String message){
-       if(groupName.trim().length() == 0) {
+       if(verification.getLineLengthWithoutSpaces(groupName) == 0) {
            queryToVkontakteWithId = "https://api.vk.com/method/messages.send?" +
                    "user_ids=-" + idGroup +
                    "&message=" + message +
@@ -34,7 +41,7 @@ public class MessageProvider {
            executeQueryOnVkotakte(queryToVkontakteWithId);
        }
 
-       if(idGroup.trim().length() == 0) {
+       if(verification.getLineLengthWithoutSpaces(idGroup) == 0) {
            queryToVkontakteWithGroupName = "https://api.vk.com/method/messages.send?" +
                    "domain=" + groupName +
                    "&message=" + message +

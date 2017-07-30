@@ -2,14 +2,12 @@ package listener;
 
 import core.verification.VerificationFields;
 import core.workwithvkapi.MessageProvider;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MessageListener implements ActionListener {
 
-    private int countMessages;
     private final int EXIT_CODE = 0;
     private String myToken;
     private String message;
@@ -26,7 +24,7 @@ public class MessageListener implements ActionListener {
 
     public MessageListener() {
         this.verification = new VerificationFields();
-        messageProvider = new MessageProvider();
+        this.messageProvider = new MessageProvider();
     }
 
     public void setGroupNameField(JTextField groupNameField) {
@@ -58,7 +56,6 @@ public class MessageListener implements ActionListener {
         if ( !isPressedExitButton(e) ) {
                 checkFields();
             if (isPressedSendButton(e)) {
-
                 getFieldsValuesAndReportToMessagePovider();
             }
         } else {
@@ -82,7 +79,7 @@ public class MessageListener implements ActionListener {
         return e.getSource() == sendBtn;
     }
 
-    public void  getFieldsValuesAndReportToMessagePovider(){
+    public void getFieldsValuesAndReportToMessagePovider(){
         myToken = myTokenfField.getText();
         idGroup = idGroupField.getText();
         message = messageField.getText();
@@ -98,30 +95,34 @@ public class MessageListener implements ActionListener {
         if(verification.isEmptyTokenField(myTokenfField)){
             myToken = verification.getValueFieldAfterVerification("Вы не ввели токен, введите снова:",
                                                                     "Токен не заполнен!");
-            myTokenfField.setText(myToken);
+            setValueInField(myToken, myTokenfField);
         }
 
         if(verification.isEmptyIdGroup(idGroupField) && verification.isEmptyGroupName(groupNameField) ){
             idGroup =  verification.getValueFieldAfterVerification("Вы не ввели id группы, введите снова:",
                                                                     "Id группы не заполнено!");
-            idGroupField.setText(idGroup);
+            setValueInField(idGroup,idGroupField);
 
             if(verification.isEmptyIdGroup(idGroupField)){
                 groupName =  verification.getValueFieldAfterVerification("Вы не ввели имя группы, введите снова:",
                                                                            "Имя группы не заполнено!");
-                groupNameField.setText(groupName);
+                setValueInField(groupName, groupNameField);
             }
         }
 
         if(verification.isEmptyMessage(messageField)) {
             message = verification.getValueFieldAfterVerification("Вы не ввели сообщение, введите снова:",
                                                                    "Сообщение не запаолнено!");
-            messageField.setText(message);
+            setValueInField(message, messageField);
         }
 
         if(!verification.isEmptyIdGroup(idGroupField) && !verification.isEmptyGroupName(groupNameField) ){
             JOptionPane.showMessageDialog(null,"Нельзя одноременно указывать два поля" +
                                         ":id группы и имя групы.\nТолько одно из них должно быть заполнено");
         }
+    }
+
+    public void setValueInField(String fieldValue, JTextField fieldName){
+        fieldName.setText(fieldValue);
     }
 }

@@ -26,7 +26,6 @@ public class MessengerView extends JFrame{
     public static void main(String[] args) {
         MessengerView messengerView = new MessengerView();
         messengerView.drawWindowElements();
-
     }
 
     public MessengerView()  {
@@ -40,7 +39,8 @@ public class MessengerView extends JFrame{
         myTokenfField.addActionListener(messageListener);
 
         idGroupField = new JTextField();
-        idGroupField.setToolTipText("Введите id группы(например 46258034) в которые хотите написать(либо имя группы в следующем поле)");
+        idGroupField.setToolTipText("Введите id группы(например 46258034) в " +
+                   "которые хотите написать(либо имя группы в следующем поле)");
         idGroupField.addActionListener(messageListener);
 
         messageField = new JTextField();
@@ -65,8 +65,8 @@ public class MessengerView extends JFrame{
         exitBtn.addActionListener(messageListener);
 
         JPanel mainPanel = new JPanel();
-        int rows = 10;
-        int columns = 10;
+        int rows = 12;
+        int columns = 12;
         mainPanel.setLayout(new GridLayout(rows,columns));
         mainPanel.add(myTokenLabel);
         mainPanel.add(myTokenfField);
@@ -86,6 +86,7 @@ public class MessengerView extends JFrame{
         messageListener.setMyTokenfField(myTokenfField);
         messageListener.setIdGroupField(idGroupField);
         messageListener.setGroupNameField(groupNameField);
+
         messageListener.setMessageField(messageField);
         messageListener.setSendBtn(sendBtn);
         messageListener.setExitBtn(exitBtn);

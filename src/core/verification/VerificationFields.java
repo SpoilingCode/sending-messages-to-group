@@ -3,7 +3,6 @@ package core.verification;
 import javax.swing.*;
 
 public class VerificationFields {
-
     public boolean isEmptyTokenField(JTextField myTokenfField){
         return  isEmptyField(myTokenfField);
     }
@@ -31,4 +30,7 @@ public class VerificationFields {
                             windowTitle, JOptionPane.INFORMATION_MESSAGE );
     }
 
+    public int getLineLengthWithoutSpaces(String line){
+        return line.trim().length();
+    }
 }
